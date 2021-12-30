@@ -1,0 +1,14 @@
+version: 2.1
+
+jobs:
+  myjob1:
+      docker:
+        - image: 
+      steps:
+        - checkout 
+        - run: echo "hello world" 
+
+workflows:
+  myWorkflow:
+    jobs:
+      - myjob1
