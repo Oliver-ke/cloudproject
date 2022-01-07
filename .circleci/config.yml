@@ -49,7 +49,6 @@ jobs:
   create_and_deploy_front_end:
     docker:
       - image: amazon/aws-cli
-    
     steps:
       - checkout
       - run:
@@ -61,7 +60,8 @@ jobs:
             --parameter-overrides MyBucketName="mybucket-${CIRCLE_WORKFLOW_ID:0:5}"
       - run:
           name: copy bucket files
-          command: aws s3 sync ./index.html s3://mybucket-${CIRCLE_WORKFLOW_ID:0:5} --delete
+          command: aws s3 sync . s3://mybucket-${CIRCLE_WORKFLOW_ID:0:5} --delete
+      - destroy_environment
   
   get_last_deployment_id:
     docker:
