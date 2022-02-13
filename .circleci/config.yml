@@ -15,4 +15,4 @@ jobs:
 workflows:
   deployment:
     jobs:
-      - test-cluster:
+      - test-cluster
