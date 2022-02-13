@@ -8,7 +8,7 @@ jobs:
       - image: 'cimg/python:3.10'
     steps:
       - checkout
-       - kubernetes/install
+      - kubernetes/install
       - aws-eks/update-kubeconfig-with-authenticator:
           cluster-name: geohospital
       - run:
