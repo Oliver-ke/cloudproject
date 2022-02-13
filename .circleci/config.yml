@@ -5,11 +5,15 @@ orbs:
 jobs:
   test-cluster:
     docker:
-      - image: 'weaveworks/eksctl'
+      - image: 'cimg/python:3.10'
     steps:
+      - checkout
+       - kubernetes/install
+      - aws-eks/update-kubeconfig-with-authenticator:
+          cluster-name: geohospital
       - run:
           command: |
-            eksctl create cluster
+            kubectl get svc
           name: Test cluster
 
 workflows:
