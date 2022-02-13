@@ -4,6 +4,22 @@ orbs:
   aws-eks: circleci/aws-eks@2.1.1
 
 jobs:
+
+  convert_files:
+    docker:
+      - image: 'cimg/python:3.10'
+    steps:
+      - checkout
+      - run:
+          name: "add yd"
+          command: |
+            wget https://github.com/mikefarah/yq/releases/download/${VERSION}/${BINARY} -O /usr/bin/yq &&\
+            chmod +x /usr/bin/yq
+      - run:
+          name: "test yd"
+          command: |
+            yq -i '.jobs.test-cluster.docker = "cool"' config.bk2.yml
+
   test-cluster:
     docker:
       - image: 'cimg/python:3.10'
@@ -21,3 +37,4 @@ workflows:
   deployment:
     jobs:
       - test-cluster
+      - convert_files
