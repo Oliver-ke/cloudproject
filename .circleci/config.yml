@@ -21,7 +21,7 @@ jobs:
       - run:
           name: "test yd"
           command: |
-            yq -i '.jobs.test-cluster.docker = "cool"' config.bk2.yml
+            yq -h
 
   test-cluster:
     docker:
